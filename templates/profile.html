@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Leaf Connect</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Icons from Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    Leaf Connect
+                    <span class="logo-icon">🌱</span>
+                </a>
+                <button class="nav-btn">
+                    <i data-feather="menu"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#explore">Explore</a></li>
+                    <li><a href="/create-listing" class="user-link" style="display: none;">Sell/Trade</a></li>
+                    <li><a href="/login" class="auth-link">Login</a></li>
+                    <li><a href="/register" class="auth-link">Register</a></li>
+                    <li><a href="/dashboard" class="user-link" style="display: none;">Dashboard</a></li>
+                    <li><a href="/messages" class="user-link" style="display: none;">Messages</a></li>
+                    <li><a href="#" id="logout-btn" class="user-link" style="display: none;">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div id="profile-container">
+            <!-- Profile View Section -->
+            <section id="profile-view" class="profile mb-4">
+                <div class="profile-sidebar">
+                    <img src="https://images.unsplash.com/photo-1438109382753-8368e7e1e7cf" alt="User Profile" class="profile-avatar">
+                    <div class="profile-info">
+                        <h2 class="profile-name">Loading...</h2>
+                        <p class="profile-username">@username</p>
+                        <p class="profile-location">
+                            <i data-feather="map-pin"></i>
+                            <span>Location</span>
+                        </p>
+                        <p>Member since <span class="profile-join-date">Date</span></p>
+                    </div>
+                    <button id="edit-profile-btn" class="btn btn-outline btn-block" style="display: none;">Edit Profile</button>
+                </div>
+                <div class="profile-content">
+                    <h3>About</h3>
+                    <p class="profile-bio">Loading bio...</p>
+                    
+                    <h3 class="mt-4">Contact</h3>
+                    <button class="btn btn-primary" id="message-user-btn">
+                        <i data-feather="message-circle"></i>
+                        Send Message
+                    </button>
+                </div>
+            </section>
+
+            <!-- Profile Edit Section (initially hidden) -->
+            <section id="profile-edit" style="display: none;" class="mb-4">
+                <h2>Edit Profile</h2>
+                <form id="edit-profile-form">
+                    <div class="form-group">
+                        <label for="edit-name" class="form-label">Full Name</label>
+                        <input type="text" id="edit-name" name="name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-location" class="form-label">Location</label>
+                        <input type="text" id="edit-location" name="location" class="form-control" placeholder="City, State">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-bio" class="form-label">Bio</label>
+                        <textarea id="edit-bio" name="bio" class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-image-input" class="form-label">Profile Image</label>
+                        <input type="file" id="profile-image-input" accept="image/*" class="form-control">
+                        <div class="image-preview mt-2">
+                            <img id="profile-image-preview" src="" alt="Profile Preview" style="max-width: 150px; max-height: 150px; display: none;">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" id="cancel-edit-btn" class="btn btn-outline">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- User Listings Section -->
+            <section>
+                <h2>Listings</h2>
+                <div id="user-listings" class="mt-3">
+                    <p class="text-center">Loading listings...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-heading">Leaf Connect</h3>
+                    <p>Connecting plant enthusiasts locally since 2023.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#explore">Explore</a></li>
+                        <li><a href="/login" class="auth-link">Login</a></li>
+                        <li><a href="/register" class="auth-link">Register</a></li>
+                        <li><a href="/dashboard" class="user-link" style="display: none;">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Plant Care Tips</a></li>
+                        <li><a href="#">Trading Guide</a></li>
+                        <li><a href="#">Identifying Plants</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Email Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Leaf Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer> -->
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/profile.js"></script>
+    <script src="/static/js/listings.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Feather icons
+            feather.replace();
+            
+            // Setup message button
+            const messageBtn = document.getElementById('message-user-btn');
+            if (messageBtn) {
+                messageBtn.addEventListener('click', function() {
+                    const profileContainer = document.getElementById('profile-container');
+                    const userId = profileContainer.dataset.userId;
+                    if (userId) {
+                        window.location.href = `/messages?userId=${userId}`;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

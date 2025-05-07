@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Leaf Connect</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Icons from Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    
+                    Leaf Connect
+                    <span class="logo-icon">🌱</span>
+                </a>
+                <button class="nav-btn">
+                    <i data-feather="menu"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#explore">Explore</a></li>
+                    <li><a href="/create-listing">Sell/Trade</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/messages" class="active">Messages</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1>Messages</h1>
+        <p>Communicate with buyers and sellers about plants.</p>
+
+        <div class="messages-container">
+            <!-- Conversations List -->
+            <div id="conversations-list" class="conversations-list">
+                <div class="loading">
+                    <p>Loading conversations...</p>
+                </div>
+            </div>
+
+            <!-- Message Area -->
+            <div class="message-area">
+                <!-- Message Header -->
+                <div id="message-header" class="message-header">
+                    <div class="message-header-content">
+                        <span>Select a conversation</span>
+                    </div>
+                </div>
+
+                <!-- Message Body -->
+                <div id="message-body" class="message-body">
+                    <div class="empty-messages">
+                        <p>Select a conversation from the list or start a new one from a listing page.</p>
+                    </div>
+                </div>
+
+                <!-- Message Form -->
+                <div id="message-form" class="message-form">
+                    <!-- Form will be dynamically generated when a conversation is selected -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-heading">Leaf Connect</h3>
+                    <p>Connecting plant enthusiasts locally since 2023.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#explore">Explore</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/messages">Messages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Plant Care Tips</a></li>
+                        <li><a href="#">Trading Guide</a></li>
+                        <li><a href="#">Identifying Plants</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Email Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Leaf Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>  -->
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/messages.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Feather icons
+            feather.replace();
+            
+            // Check authentication and redirect if not logged in
+            checkAuth().then(user => {
+                if (!user) {
+                    window.location.href = '/login';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

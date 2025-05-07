@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Listing - Leaf Connect</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Icons from Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                Leaf Connect
+                <span class="logo-icon">🌱</span>
+                </a>
+                <button class="nav-btn">
+                    <i data-feather="menu"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#explore">Explore</a></li>
+                    <li><a href="/create-listing" class="active">Sell/Trade</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/messages">Messages</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1>Create a New Listing</h1>
+        <p>Share your plants, seeds, or cuttings with the community.</p>
+
+        <div class="create-listing-container">
+            <form id="create-listing-form" action="/api/listings" method="POST">
+                <div class="form-group">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" name="title" class="form-control" required 
+                           placeholder="e.g., Monstera Deliciosa Cutting">
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" name="description" class="form-control" rows="4" required
+                              placeholder="Describe your plant, its condition, age, and any other relevant details"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="type" class="form-label">Listing Type</label>
+                        <select id="type" name="type" class="form-control" required>
+                            <option value="">Select Type</option>
+                            <option value="plant">Full Plant</option>
+                            <option value="cutting">Cutting</option>
+                            <option value="seed">Seeds</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plantType" class="form-label">Plant Type</label>
+                        <select id="plantType" name="plantType" class="form-control" required>
+                            <option value="">Select Plant Type</option>
+                            <option value="indoor">Indoor</option>
+                            <option value="outdoor">Outdoor</option>
+                            <option value="succulent">Succulent</option>
+                            <option value="vegetable">Vegetable</option>
+                            <option value="herb">Herb</option>
+                            <option value="flower">Flower</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="price" class="form-label">Price (₹)</label>
+                        <input type="number" id="price" name="price" class="form-control" required min="0" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" id="location" name="location" class="form-control" required 
+                               placeholder="Delhi, Mumbai, Chennai, Hyderabad">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tradeFor" class="form-label">Will Trade For (Optional)</label>
+                    <input type="text" id="tradeFor" name="tradeFor" class="form-control" 
+                           placeholder="e.g., Pothos varieties, philodendrons">
+                </div>
+
+                <div class="form-group">
+                    <label for="image-input" class="form-label">Upload Image</label>
+                    <input type="file" id="image-input" accept="image/*" class="form-control">
+                    <div id="image-preview" class="image-preview mt-2"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg">Create Listing</button>
+            </form>
+
+           <!-- <div class="listing-tips">
+                <h3>Tips for a Great Listing</h3>
+                <ul>
+                    <li>Use clear, well-lit photos that accurately show the plant's condition</li>
+                    <li>Be specific about the plant's age, size, and any special care requirements</li>
+                    <li>Mention if the plant comes potted or bare-rooted</li>
+                    <li>List any known issues or imperfections for transparency</li>
+                    <li>Include whether you prefer local pickup or are willing to ship</li>
+                </ul>
+            </div>-->
+        </div>
+    </main>
+
+    <!-- Footer
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-heading">Leaf Connect</h3>
+                    <p>Connecting plant enthusiasts locally since 2023.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#explore">Explore</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/messages">Messages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Plant Care Tips</a></li>
+                        <li><a href="#">Trading Guide</a></li>
+                        <li><a href="#">Identifying Plants</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Email Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Leaf Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer> -->
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/listings.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Feather icons
+            feather.replace();
+            
+            // Check authentication and redirect if not logged in
+            checkAuth().then(user => {
+                if (!user) {
+                    window.location.href = '/login';
+                } else {
+                    // Pre-fill location from user profile
+                    const locationInput = document.getElementById('location');
+                    if (locationInput && user.location) {
+                        locationInput.value = user.location;
+                    }
+                }
+            });
+            
+            // Handle form submission
+            const createListingForm = document.getElementById('create-listing-form');
+            if (createListingForm) {
+                createListingForm.addEventListener('submit', createListing);
+            }
+            
+            // Handle image upload
+            const imageInput = document.getElementById('image-input');
+            if (imageInput) {
+                imageInput.addEventListener('change', handleImageUpload);
+            }
+        });
+    </script>
+</body>
+</html>

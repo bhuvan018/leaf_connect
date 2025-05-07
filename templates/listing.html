@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing Details - Leaf Connect</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Icons from Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    
+                    Leaf Connect
+                    <span class="logo-icon">🌱</span>
+                </a>
+                <!-- <button class="nav-btn">
+                    <i data-feather="menu"></i>
+                </button> -->
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#explore">Explore</a></li>
+                    <li><a href="/create-listing" class="user-link" style="display: none;">Sell/Trade</a></li>
+                    <li><a href="/login" class="auth-link">Login</a></li>
+                    <li><a href="/register" class="auth-link">Register</a></li>
+                    <li><a href="/dashboard" class="user-link" style="display: none;">Dashboard</a></li>
+                    <li><a href="/messages" class="user-link" style="display: none;">Messages</a></li>
+                    <li><a href="#" id="logout-btn" class="user-link" style="display: none;">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div id="listing-container">
+            <div class="loading">
+                <p>Loading listing details...</p>
+            </div>
+        </div>
+
+        <!-- Similar Listings Section -->
+        <section class="mb-4">
+            <h2>Similar Listings</h2>
+            <div id="similar-listings" class="grid">
+                <!-- Similar listings will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-heading">Leaf Connect</h3>
+                    <p>Connecting plant enthusiasts locally since 2023.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#explore">Explore</a></li>
+                        <li><a href="/login" class="auth-link">Login</a></li>
+                        <li><a href="/register" class="auth-link">Register</a></li>
+                        <li><a href="/dashboard" class="user-link" style="display: none;">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Plant Care Tips</a></li>
+                        <li><a href="#">Trading Guide</a></li>
+                        <li><a href="#">Identifying Plants</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Email Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Leaf Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>  -->
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/listings.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Feather icons
+            feather.replace();
+            
+            // Get listing ID from URL
+            const pathParts = window.location.pathname.split('/');
+            const listingId = pathParts[pathParts.length - 1];
+            
+            // Fetch and display the listing
+            fetchListing(listingId).then(listing => {
+                if (listing) {
+                    // Set page title
+                    document.title = `${listing.title} - Leaf Connect`;
+                    
+                    // Fetch similar listings (same type or plant type)
+                    fetchSimilarListings(listing);
+                }
+            });
+        });
+        
+        // Function to fetch similar listings
+        async function fetchSimilarListings(currentListing) {
+            try {
+                // Fetch listings with same plant type
+                const response = await fetch(`/api/listings?plantType=${currentListing.plantType}`);
+                if (!response.ok) throw new Error('Failed to fetch similar listings');
+                
+                const listings = await response.json();
+                
+                // Filter out the current listing and limit to 4 results
+                const similarListings = listings
+                    .filter(listing => listing.id !== currentListing.id)
+                    .slice(0, 4);
+                
+                const container = document.getElementById('similar-listings');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                if (similarListings.length === 0) {
+                    container.innerHTML = '<p class="text-center">No similar listings found.</p>';
+                    return;
+                }
+                
+                // Add similar listing cards
+                similarListings.forEach(listing => {
+                    container.appendChild(createListingCard(listing));
+                });
+            } catch (error) {
+                console.error('Error fetching similar listings:', error);
+                const container = document.getElementById('similar-listings');
+                if (container) {
+                    container.innerHTML = '<p class="text-center">Could not load similar listings.</p>';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
