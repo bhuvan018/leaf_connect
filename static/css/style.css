@@ -160,16 +160,29 @@ img {
   display: flex;
   list-style: none;
 
+  align-items: center; /* Added to ensure vertical alignment */
+  margin: 0; /* Reset any default margins */
+  height: 100%; 
+
 }
 
 .nav-links li {
   margin-left: var(--spacing-lg);
+
+  display: flex; /* Added to ensure proper alignment */
+  align-items: center; /* Vertically center the content */
+  height: 100%; /* Match parent height */
 
 }
 
 .nav-links a {
   font-weight: 600;
   padding: var(--spacing-sm);
+
+  display: flex; /* Make links flex containers */
+  align-items: center; /* Center contents vertically */
+  height: 100%; /* Full height of the parent */
+  position: relative; /
 
 
 }
