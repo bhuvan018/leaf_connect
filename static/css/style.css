@@ -723,50 +723,6 @@ img {
   text-align: center;
 }
 
-/* Footer */
-.footer {
-  margin-top: auto;
-  background-color: var(--primary-dark);
-  color: var(--white);
-  padding: var(--spacing-xl) 0;
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-xl);
-}
-
-.footer-heading {
-  font-size: var(--font-size-lg);
-  margin-bottom: var(--spacing-md);
-  color: var(--white);
-}
-
-.footer-links {
-  list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: var(--spacing-sm);
-}
-
-.footer-links a {
-  color: var(--gray-light);
-}
-
-.footer-links a:hover {
-  color: var(--white);
-}
-
-.footer-bottom {
-  margin-top: var(--spacing-xl);
-  padding-top: var(--spacing-md);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
-  font-size: var(--font-size-sm);
-  color: var(--gray-light);
-}
 
 /* Utilities */
 .text-center {
@@ -864,12 +820,49 @@ img {
     flex-direction: column;
     background-color: var(--white);
     box-shadow: var(--shadow-md);
-    padding: var(--spacing-md);
+   /* padding: var(--spacing-md);*/
+
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+    overflow: visible;
+    width: 100%;
+    z-index: 1000;
   }
 
   .nav-links li {
-    margin: var(--spacing-sm) 0;
+   /*margin: var(--spacing-sm) 0;*/
+
+    margin: 0;
+    margin-left: 0 !important; /* Override the desktop margin-left */
+    border-bottom: 1px solid var(--gray-light);
+    width: 100%;
+    display: block; /* Ensure each li is visible */
+    height: auto;
+
   }
+/**/
+ .nav-links li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: var(--spacing-md) var(--spacing-lg);
+    width: 100%;
+    height: auto;
+    background-color: var(--white);
+    color: var(--text);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    position: static;
+  }
+
+  .nav-links a:hover {
+    background-color: var(--gray-light);
+    color: var(--primary);
+    text-decoration: none;
+  }
+  /**/
 
   .nav-links.show {
     display: flex;
@@ -878,6 +871,17 @@ img {
   .nav-btn {
     display: block;
   }
+  /**/
+    .navbar {
+    position: relative;
+    z-index: 1000;
+  }
+
+  .nav-links {
+    z-index: 999;
+  }
+  /**/
+  
 }
 
 @media (max-width: 480px) {
